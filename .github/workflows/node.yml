@@ -8,12 +8,12 @@ on:
   pull_request:
    branches:    
       - master
-      # - !main
-    tags:        
-      - v1           
-      - v1.*
+      - '!main'
+    # tags:        
+    #   - v1           
+    #   - v1.*
   release:
-    types: # This configuration does not affect the page_build event above
+    types: 
       - created
   page_build:
   schedule:
