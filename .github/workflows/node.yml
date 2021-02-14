@@ -47,6 +47,7 @@ jobs:
     name: Buiiild
     runs-on: self-hosted
     needs: teszt
+    timeout-minutes: 360
     steps:
     - name: Frissítés
       uses: actions/checkout@v2
@@ -57,6 +58,8 @@ jobs:
         node-version: 14.x
 
     - name: Install dependencies
+      continue-on-error: true
+      timeout-minutes: 360
       run: npm ci
       working-directory: ./
       shell: bash
