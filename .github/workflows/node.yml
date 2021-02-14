@@ -26,6 +26,7 @@ env:
 
 jobs:
   teszt:
+    runs-on: self-hosted
     steps:
     - name: Print a greeting
       env:
