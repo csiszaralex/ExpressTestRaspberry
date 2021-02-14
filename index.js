@@ -4,7 +4,7 @@ const app = express();
 
 
 app.route("/").get((req, res) => {
-  res.status(200).send("<h1>Ez jó3</h1>");
+  res.status(200).send("<h1>Ez jó4</h1>");
 });
 
 app.listen(3000, () => {
