@@ -1,21 +1,56 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Node.js CI
+name: Valami név
 
 on:
   push:
     branches: [ master ]
+    paths:
+      - '**.js'
   pull_request:
-    branches: [ master ]
+   branches:    
+      - master
+      - '!main'
+    # branches-ignore: #! Vagy ignore, vagy sima 
+    #   - 'fgh'
+    # Sequence of patterns matched against refs/tags
+    tags:        
+      - v1             # Push events to v1 tag
+      - 'v1.*'
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created
+  page_build:
+  schedule:
+    - cron:  '* */2 * * *'
+    #. * * * * * --> perc(0-59), óra(0-23), nap(1-31), hónap(1-12)(JAN-DEC), hét_napja(0-6)(SUN-SAT)
+    #. * = mind; ,=és; -=tól-ig; */15 = minden 15. (perc)
+
+env:
+  SERVER: production
 
 jobs:
-  build:
-
-    runs-on: self-hosted
-
+  teszt:
     steps:
-    - uses: actions/checkout@v2
+    - name: Print a greeting
+      env:
+        MY_VAR: Hi there! My name is
+        FIRST_NAME: Mona
+        MIDDLE_NAME: The
+        LAST_NAME: Octocat
+      run: |
+        echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
+    - name: My first step
+        uses: actions/hello_world@main
+        with:
+          first_name: Mona
+          middle_name: The
+          last_name: Octocat 
+
+  build:
+    name: Buiiild
+    runs-on: self-hosted
+    steps:
+    - name: Frissítés
+      uses: actions/checkout@v2
 
     - name: Use Node.js 14.x
       uses: actions/setup-node@v1
@@ -24,6 +59,13 @@ jobs:
 
     - name: Install dependencies
       run: npm ci
+      working-directory: ./
+      shell: bash
 
     - name: Restart PM2 server
       run: pm2 restart index
+
+  mas:
+    name: Másik RESTART
+    needs: build
+
