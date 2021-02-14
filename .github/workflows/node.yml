@@ -45,6 +45,7 @@ jobs:
   build:
     name: Buiiild
     runs-on: self-hosted
+    needs: teszt
     steps:
     - name: Frissítés
       uses: actions/checkout@v2
@@ -61,8 +62,4 @@ jobs:
 
     - name: Restart PM2 server
       run: pm2 restart index
-
-  mas:
-    name: Másik RESTART
-    needs: build
 
