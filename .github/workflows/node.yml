@@ -8,7 +8,7 @@ on:
   pull_request:
    branches:    
       - master
-      - '!main'
+      - !main
     tags:        
       - v1           
       - v1.*
