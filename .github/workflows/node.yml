@@ -16,8 +16,8 @@ on:
     types: 
       - created
   page_build:
-  schedule:
-    - cron:  '* */2 * * *'
+  #schedule:
+  #  - cron:  '* */2 * * *'
     #. * * * * * --> perc(0-59), óra(0-23), nap(1-31), hónap(1-12)(JAN-DEC), hét_napja(0-6)(SUN-SAT)
     #. * = mind; ,=és; -=tól-ig; */15 = minden 15. (perc)
 
